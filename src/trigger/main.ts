@@ -31,8 +31,8 @@ export const firstScheduledTask = schedules.task({
           }
         }
         if (newJobs.length != 0) {
+          logger.info("Inserting new jobs", { newJobs });
           await db.insert(jobsTable).values(newJobs).run();
-          logger.info("New jobs inserted", { newJobs });
           let { data, error } = await resend.emails.send({
             from: "Job hunter <job.hunter@yassine-safraoui.me>",
             to: ["yassine.safraoui@grenoble-inp.org"],
